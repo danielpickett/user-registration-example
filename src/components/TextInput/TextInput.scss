@@ -1,0 +1,24 @@
+@import 'tokens';
+
+.TextInput {
+  &__label {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-size: $text-size-s;
+    color: $text-on-white;
+  }
+  &__input {
+    display: block;
+    width: 100%;
+    border: none;
+    background-color: $color-grey-100;
+    padding: 0.5rem;
+    border-radius: $border-radius-s;
+    font-size: $text-size-l;
+    &:focus {
+      outline: none;
+      box-shadow: $focus-ring;
+      background-color: $color-grey-050;
+    }
+  }
+}

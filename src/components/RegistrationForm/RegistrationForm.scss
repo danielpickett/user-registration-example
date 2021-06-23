@@ -1,0 +1,20 @@
+@import 'tokens';
+
+.RegistrationForm {
+  display: grid;
+  gap: 1rem;
+  &__heading {
+    font-size: $text-size-xl;
+    margin-top: 0;
+  }
+  &__button {
+    margin-top: 1rem;
+    font-size: $text-size-s;
+    font-weight: $text-weight-bold;
+    background-color: $color-primary;
+    border: none;
+    border-radius: $border-radius-s;
+    padding: 0.75rem 1rem;
+    color: $text-on-primary;
+  }
+}
