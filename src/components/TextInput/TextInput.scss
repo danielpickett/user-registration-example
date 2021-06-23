@@ -3,6 +3,7 @@
 .TextInput {
   &__label {
     display: block;
+    text-align: start;
     margin-bottom: 0.25rem;
     font-size: $text-size-s;
     color: $text-on-white;
@@ -20,5 +21,12 @@
       box-shadow: $focus-ring;
       background-color: $color-grey-050;
     }
+  }
+  &__message {
+    margin-top: 0.125rem;
+    display: block;
+    font-size: $text-size-xs;
+    color: $text-on-white--danger;
+    text-align: end;
   }
 }

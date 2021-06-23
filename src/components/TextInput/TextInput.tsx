@@ -4,16 +4,28 @@ import './TextInput.scss'
 export const TextInput = ({
   label,
   value,
-  onChange,
   name,
+  touched,
+  valid,
+  onChange,
+  onBlur,
 }: {
   label: string
   value: string
-  onChange: (newValue: string, name: string) => void
   name: string
+  touched: boolean
+  valid: boolean
+  onChange: (newValue: string, name: string) => void
+  onBlur: (name: string) => void
 }) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) =>
     onChange(e.target.value, name)
+
+  const message = (() => {
+    if (touched && value === '') return 'required'
+    if (value !== '' && !valid) return `Invalid ${label.toLowerCase()}`
+    return <>&nbsp;</>
+  })()
 
   return (
     <div className="TextInput">
@@ -26,7 +38,9 @@ export const TextInput = ({
         type="text"
         value={value}
         onChange={handleChange}
+        onBlur={() => onBlur(name)}
       />
+      <span className="TextInput__message">{message}</span>
     </div>
   )
 }
