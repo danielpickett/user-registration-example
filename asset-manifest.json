@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/user-registration-example/static/css/main.133dfab7.chunk.css",
-    "main.js": "/user-registration-example/static/js/main.68fc3ac0.chunk.js",
-    "main.js.map": "/user-registration-example/static/js/main.68fc3ac0.chunk.js.map",
+    "main.css": "/user-registration-example/static/css/main.daf3fcdc.chunk.css",
+    "main.js": "/user-registration-example/static/js/main.7cf48402.chunk.js",
+    "main.js.map": "/user-registration-example/static/js/main.7cf48402.chunk.js.map",
     "runtime-main.js": "/user-registration-example/static/js/runtime-main.0cbbdb8e.js",
     "runtime-main.js.map": "/user-registration-example/static/js/runtime-main.0cbbdb8e.js.map",
-    "static/js/2.5a4ffb83.chunk.js": "/user-registration-example/static/js/2.5a4ffb83.chunk.js",
-    "static/js/2.5a4ffb83.chunk.js.map": "/user-registration-example/static/js/2.5a4ffb83.chunk.js.map",
+    "static/js/2.ac37ddc5.chunk.js": "/user-registration-example/static/js/2.ac37ddc5.chunk.js",
+    "static/js/2.ac37ddc5.chunk.js.map": "/user-registration-example/static/js/2.ac37ddc5.chunk.js.map",
     "index.html": "/user-registration-example/index.html",
-    "static/css/main.133dfab7.chunk.css.map": "/user-registration-example/static/css/main.133dfab7.chunk.css.map",
-    "static/js/2.5a4ffb83.chunk.js.LICENSE.txt": "/user-registration-example/static/js/2.5a4ffb83.chunk.js.LICENSE.txt"
+    "static/css/main.daf3fcdc.chunk.css.map": "/user-registration-example/static/css/main.daf3fcdc.chunk.css.map",
+    "static/js/2.ac37ddc5.chunk.js.LICENSE.txt": "/user-registration-example/static/js/2.ac37ddc5.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.0cbbdb8e.js",
-    "static/js/2.5a4ffb83.chunk.js",
-    "static/css/main.133dfab7.chunk.css",
-    "static/js/main.68fc3ac0.chunk.js"
+    "static/js/2.ac37ddc5.chunk.js",
+    "static/css/main.daf3fcdc.chunk.css",
+    "static/js/main.7cf48402.chunk.js"
   ]
 }
