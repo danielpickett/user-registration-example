@@ -28,7 +28,7 @@ export const registrationFormFields: FormFieldType[] = [
     test: phoneNumRegEx.test.bind(phoneNumRegEx),
     mask: phoneNumberUSAMask,
   },
-  // TODO: break this field into individual fields
+  // TODO: break 'businessAddress' field into individual fields
   {
     name: 'businessAddress',
     label: 'Business address',
