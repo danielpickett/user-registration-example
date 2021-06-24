@@ -65,7 +65,6 @@ export const Form = ({
         return { ...fields, [key]: value }
       }, {})
       if (onSubmit) onSubmit(temp)
-      // alert(JSON.stringify(state, null, 2))
     }
   }
 
