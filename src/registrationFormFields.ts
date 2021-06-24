@@ -35,7 +35,8 @@ export const registrationFormFields: FormFieldType[] = [
     // TODO: add support for international phone numbers
     mask: phoneNumberUSAMask,
   },
-  // TODO: break 'businessAddress' field into individual fields
+  // TODO: break 'businessAddress' into individual fields with
+  // proper masking and validation
   {
     name: 'businessAddress',
     label: 'Business address',
