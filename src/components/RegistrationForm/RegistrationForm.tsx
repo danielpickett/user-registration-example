@@ -1,69 +1,74 @@
 import { useState } from 'react'
 import { TextInput } from 'components'
 import './RegistrationForm.scss'
-import { emailRegEx, numbersOnlyRegEx, phoneNumRegEx } from 'regex'
 
-const formFields = [
-  { name: 'firstName', label: 'First name', regex: undefined },
-  { name: 'lastName', label: 'Last name', regex: undefined },
-  { name: 'npiNumber', label: 'NPI number', regex: numbersOnlyRegEx },
-  { name: 'businessAddress', label: 'Business address', regex: undefined },
-  {
-    name: 'phoneNumber',
-    label: 'Phone number',
-    regex: phoneNumRegEx,
-  },
-  { name: 'email', label: 'Email', regex: emailRegEx },
-] as const
+export type FormFieldType = {
+  name: string
+  label: string
+  placeholder?: string
+  test?: (string: string) => boolean
+  mask?: (string: string) => string
+}
 
-type FieldNameType = typeof formFields[number]['name']
 type FieldStateType = { value: string; touched: boolean }
-type InitialStateType = Record<FieldNameType, FieldStateType>
+type InitialStateType = Record<string, FieldStateType>
 
-const initialState = formFields.reduce<Partial<InitialStateType>>(
-  (fields, field) => {
-    return {
-      ...fields,
-      [field.name]: { value: '', touched: false },
-    }
-  },
-  {}
-) as InitialStateType
-
-export const RegistrationForm = () => {
+export const RegistrationForm = ({
+  formFields,
+}: {
+  formFields: FormFieldType[]
+}) => {
+  const initialState = formFields.reduce<Partial<InitialStateType>>(
+    (fields, field) => {
+      return {
+        ...fields,
+        [field.name]: { value: '', touched: false },
+      }
+    },
+    {}
+  ) as InitialStateType
   const [state, setState] = useState(initialState)
 
-  const handleChange = (value: string, name: string) =>
-    setState((prev) => ({
-      ...prev,
-      [name]: { ...prev[name as FieldNameType], value },
-    }))
-
-  const handleClick = () => {
-    console.log(state)
-  }
-  const handleBlur = (name: string) => {
-    setState((prev) => ({
-      ...prev,
-      [name]: { ...prev[name as FieldNameType], touched: true },
-    }))
-  }
-
-  const isValidField = (value: string, regex?: RegExp) => {
+  const isValidField = (value: string, test?: (string: string) => boolean) => {
     if (value === '') return false
-    if (!regex) return true
-    if (regex.test(value)) return true
+    if (!test) return true
+    if (test(value)) return true
     return false
   }
 
-  console.log('state', state)
   const isSubmitDisabled = formFields.some((field) => {
-    const { regex } = field
+    const { test } = field
     const { value } = state[field.name]
-    return !isValidField(value, regex)
+    return !isValidField(value, test)
   })
+  const handleChange = (value: string, name: string) => {
+    const mask = formFields.find((field) => name === field.name)?.mask
+    setState((prev) => ({
+      ...prev,
+      [name]: { ...prev[name], value: mask ? mask(value) : value },
+    }))
+  }
 
-  console.log('isSubmitDisabled', isSubmitDisabled)
+  const handleClick = () => {
+    if (isSubmitDisabled) {
+      Object.keys(state).forEach((key) => {
+        setState((prev) => ({
+          ...prev,
+          [key]: { ...prev[key], touched: true },
+        }))
+      })
+    } else {
+      alert(JSON.stringify(state, null, 2))
+    }
+  }
+
+  const handleBlur = (name: string) => {
+    setState((prev) => ({
+      ...prev,
+      [name]: { ...prev[name], touched: true },
+    }))
+  }
+
   return (
     <div className="RegistrationForm">
       <h1 className="RegistrationForm__heading">Provider Registration</h1>
@@ -75,8 +80,9 @@ export const RegistrationForm = () => {
             label={field.label}
             name={field.name}
             value={fieldState.value}
+            placeholder={field.placeholder}
             onChange={handleChange}
-            valid={isValidField(fieldState.value, field.regex)}
+            valid={isValidField(fieldState.value, field.test)}
             touched={fieldState.touched}
             onBlur={handleBlur}
           />
