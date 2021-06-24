@@ -1,2 +1,2 @@
 export * from './TextInput'
-export * from './RegistrationForm'
+export * from './Form'

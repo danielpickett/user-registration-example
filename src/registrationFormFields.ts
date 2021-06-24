@@ -1,6 +1,13 @@
-import { emailRegEx, numbersOnlyRegEx, phoneNumRegEx } from 'regex'
+import { emailRegEx, numbersOnlyRegEx } from 'regex'
 import { phoneNumberUSAMask, numbersOnlyMask } from 'masks'
 import { FormFieldType } from 'components'
+
+// If using RegExp.test for form field tests, don't forget to bind the regex
+// to the test function. If you don't, you'll get a runtime error.
+// https://stackoverflow.com/questions/20579033/why-do-i-need-to-write-functionvalue-return-my-functionvalue-as-a-callb
+
+const numberOnlyTest = numbersOnlyRegEx.test.bind(numbersOnlyRegEx)
+const emailTest = emailRegEx.test.bind(emailRegEx)
 
 export const registrationFormFields: FormFieldType[] = [
   {
@@ -14,18 +21,18 @@ export const registrationFormFields: FormFieldType[] = [
   {
     name: 'npiNumber',
     label: 'NPI number',
-    test: numbersOnlyRegEx.test.bind(numbersOnlyRegEx),
+    test: numberOnlyTest,
     mask: numbersOnlyMask,
   },
   {
     name: 'email',
     label: 'Email',
-    test: emailRegEx.test.bind(emailRegEx),
+    test: emailTest,
   },
   {
     name: 'phoneNumber',
     label: 'Phone number',
-    test: phoneNumRegEx.test.bind(phoneNumRegEx),
+    // TODO: add support for international phone numbers
     mask: phoneNumberUSAMask,
   },
   // TODO: break 'businessAddress' field into individual fields

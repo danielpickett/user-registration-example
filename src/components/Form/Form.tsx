@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { TextInput } from 'components'
-import './RegistrationForm.scss'
+import './Form.scss'
 
 export type FormFieldType = {
   name: string
@@ -13,10 +13,12 @@ export type FormFieldType = {
 type FieldStateType = { value: string; touched: boolean }
 type InitialStateType = Record<string, FieldStateType>
 
-export const RegistrationForm = ({
+export const Form = ({
   formFields,
+  onSubmit,
 }: {
   formFields: FormFieldType[]
+  onSubmit?: (formData: Record<string, string>) => void
 }) => {
   const initialState = formFields.reduce<Partial<InitialStateType>>(
     (fields, field) => {
@@ -27,6 +29,7 @@ export const RegistrationForm = ({
     },
     {}
   ) as InitialStateType
+
   const [state, setState] = useState(initialState)
 
   const isValidField = (value: string, test?: (string: string) => boolean) => {
@@ -58,7 +61,11 @@ export const RegistrationForm = ({
         }))
       })
     } else {
-      alert(JSON.stringify(state, null, 2))
+      const temp = Object.entries(state).reduce((fields, [key, { value }]) => {
+        return { ...fields, [key]: value }
+      }, {})
+      if (onSubmit) onSubmit(temp)
+      // alert(JSON.stringify(state, null, 2))
     }
   }
 
@@ -70,8 +77,8 @@ export const RegistrationForm = ({
   }
 
   return (
-    <div className="RegistrationForm">
-      <h1 className="RegistrationForm__heading">Provider Registration</h1>
+    <div className="Form">
+      <h1 className="Form__heading">Provider Registration</h1>
       {formFields.map((field) => {
         const fieldState = state[field.name]
         return (
@@ -90,8 +97,8 @@ export const RegistrationForm = ({
       })}
 
       <button
-        className={`RegistrationForm__button${
-          isSubmitDisabled ? ' RegistrationForm__button--is-disabled' : ''
+        className={`Form__button${
+          isSubmitDisabled ? ' Form__button--is-disabled' : ''
         }`}
         type="button"
         onClick={handleClick}
